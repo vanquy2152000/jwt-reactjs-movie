@@ -6,7 +6,7 @@ import globalLoadingSlice from "./features/globalLoadingSlice";
 import authModalSlice from "./features/authModalSlice";
 
 const store = configureStore({
-    reduce: {
+    reducer: {
         user: userSlice,
         themeMode: themeModeSlice,
         authModal: authModalSlice,
