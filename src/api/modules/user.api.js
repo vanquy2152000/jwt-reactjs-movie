@@ -22,11 +22,11 @@ const userApi = {
             return { err }
         }
     },
-    signup: async ({ username, password, confirmNewPassword, displayName }) => {
+    signup: async ({ username, password, confirmPassword, displayName }) => {
         try {
             const response = await publicClient.post(
                 userEndpoints.signup,
-                { username, password, confirmNewPassword, displayName }
+                { username, displayName, password, confirmPassword, }
             )
 
             return { response }

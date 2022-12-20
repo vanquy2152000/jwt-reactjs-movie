@@ -64,7 +64,7 @@ const routes = [
     },
     {
         path: "/:mediaType",
-        element: <MediaList />
+        element: <MediaList />,
     },
     {
         path: "/:mediaType/:mediaId",
