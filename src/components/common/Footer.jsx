@@ -25,7 +25,7 @@ const Footer = () => {
                                 component={Link}
                                 to={item.path}
                             >
-                                {item.display}
+                                {item.icon} {item.display}
                             </Button>
                         ))}
                     </Box>

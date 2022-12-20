@@ -2,8 +2,6 @@ import { Box, Stack, Typography } from '@mui/material'
 import React from 'react'
 
 const Container = ({ header, children }) => {
-    console.log("check header : ", header)
-    console.log("check children : ", children)
     return (
         <Box sx={{
             marginTop: "5rem",
