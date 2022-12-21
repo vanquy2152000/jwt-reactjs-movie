@@ -35,7 +35,6 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
             mediaCategory,
             page: 1
         })
-        console.log("check response medias", { response })
 
         if (response) setMovies(response.results);
         if (err) toast.error(err.message)
@@ -45,7 +44,6 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
     const getGenres = async () => {
         dispatch(setGlobalLoading(true))
         const { response, err } = await genreApi.getList({ mediaType })
-        console.log("check response genres", { response })
 
         if (response) {
             setGenres(response.genres)
@@ -77,12 +75,12 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
             <Swiper
                 grabCursor={true}
                 loop={true}
-                // modules={[Autoplay]}
+                modules={[Autoplay]}
                 style={{ width: "100%", height: "max-content" }}
-            // autoplay={{
-            //     delay: 3000,
-            //     disableOnInteraction: false
-            // }}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false
+                }}
             >
                 {movies.map((movie, index) => (
                     <SwiperSlide key={`heroslide-${index}`}>
