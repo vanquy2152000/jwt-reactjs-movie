@@ -12,8 +12,6 @@ const UserMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null)
     const toggleMenu = (e) => setAnchorEl(e.currentTarget)
 
-    console.log("check user", user)
-
     return (
         <>
             {user && (

@@ -45,7 +45,7 @@ const Topbar = () => {
   }
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
-  console.log("check top", menuConfigs)
+
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
