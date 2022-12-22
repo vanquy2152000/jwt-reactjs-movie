@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 
-import CircularRate from '../components/common/CircularRate';
-import Container from "../components/common/Container";
-import ImageHeader from "../components/common/ImageHeader"
+import CircularRate from '../components/common/CircularRate.jsx';
+import Container from "../components/common/Container.jsx";
+import ImageHeader from "../components/common/ImageHeader.jsx"
 
 import uiConfigs from "../configs/ui.configs"
 import tmdbConfigs from "../api/configs/tmdb.configs"
@@ -21,7 +21,7 @@ import favoriteApi from '../api/modules/favorite.api';
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice"
 import { setAuthModalOpen } from "../redux/features/authModalSlice"
 import { addFavorite, removeFavorites } from "../redux/features/userSlice"
-import CastSlide from "../components/common/CastSlide"
+import CastSlide from "../components/common/CastSlide.jsx"
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -36,7 +36,10 @@ const MediaDetail = () => {
   const dispatch = useDispatch();
   const videoRef = useRef(null)
 
+  console.log("video:", videoRef)
+
   useEffect(() => {
+    window.scrollTo(0, 0)
     getMedia()
   }, [mediaType, mediaId, dispatch])
 
@@ -92,15 +95,15 @@ const MediaDetail = () => {
     setOnRequest(true)
 
     const favorite = listFavorites.find(e => e.mediaId.toString() === media.id.toString())
-
+    console.log("favorite", favorite)
     const { response, err } = await favoriteApi.remove({ favoriteId: favorite.id })
+    setOnRequest(false)
     if (err) toast.error(err.message)
     if (response) {
       dispatch(removeFavorites(favorite));
       setIsFavorite(false);
       toast.success("Remove favorite success")
     }
-    setOnRequest(false)
   }
 
   return (

@@ -30,6 +30,7 @@ const MediaItem = ({ media, mediaType }) => {
         setRate(media.vote_average || media.mediaRate)
 
     }, [media, mediaType])
+    console.log("check meida ietm:", listFavorites)
 
     return (
         <Link to={mediaType !== "people" ?

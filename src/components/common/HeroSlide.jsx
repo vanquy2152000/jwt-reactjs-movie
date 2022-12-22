@@ -8,11 +8,11 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { toast } from "react-toastify"
 
 import { setGlobalLoading } from "../../redux/features/globalLoadingSlice"
-import { routesGen } from "../../routes/routes"
+import { routesGen } from "../../routes/routes.jsx"
 
-import uiConfigs from '../../configs/ui.configs'
+import uiConfigs from '../../configs/ui.configs.jsx'
 
-import CircularRate from './CircularRate'
+import CircularRate from './CircularRate.jsx'
 
 import tmdbConfigs from "../../api/configs/tmdb.configs"
 import genreApi from '../../api/modules/genre.api';
