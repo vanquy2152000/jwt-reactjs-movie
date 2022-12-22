@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { SwiperSlide } from 'swiper/react';
 import mediaApi from '../../api/modules/media.api';
-import AutoSwiper from './AutoSwiper';
-import MediaItem from './MediaItem';
+import AutoSwiper from './AutoSwiper.jsx';
+import MediaItem from './MediaItem.jsx';
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
     const [medias, setMedias] = useState([])

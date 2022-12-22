@@ -22,6 +22,7 @@ import { setGlobalLoading } from "../redux/features/globalLoadingSlice"
 import { setAuthModalOpen } from "../redux/features/authModalSlice"
 import { addFavorite, removeFavorites } from "../redux/features/userSlice"
 import CastSlide from "../components/common/CastSlide.jsx"
+import MediaVideosSlide from "../components/common/MediaVideosSlide.jsx"
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -35,8 +36,6 @@ const MediaDetail = () => {
 
   const dispatch = useDispatch();
   const videoRef = useRef(null)
-
-  console.log("video:", videoRef)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -104,6 +103,10 @@ const MediaDetail = () => {
       setIsFavorite(false);
       toast.success("Remove favorite success")
     }
+  }
+
+  const handleWatchNow = () => {
+    videoRef.current.scrollIntoView()
   }
 
   return (
@@ -200,7 +203,7 @@ const MediaDetail = () => {
                       sx={{ width: "max-content" }}
                       size="large"
                       startIcon={<PlayArrowIcon />}
-                      onClick={() => videoRef.current.scrollIntoView()}
+                      onClick={handleWatchNow}
                     >
                       watch now
                     </Button>
@@ -218,6 +221,14 @@ const MediaDetail = () => {
             </Box>
           </Box>
           {/* media content */}
+
+          {/* media videos */}
+          <div ref={videoRef} style={{ paddingTop: "2rem" }}>
+            <Container header="Videos">
+              <MediaVideosSlide videos={media.videos.results.splice(0, 5)} />
+            </Container>
+          </div>
+          {/* media videos */}
         </Box>
       </>
     ) : null
