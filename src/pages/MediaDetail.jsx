@@ -23,6 +23,10 @@ import { setAuthModalOpen } from "../redux/features/authModalSlice"
 import { addFavorite, removeFavorites } from "../redux/features/userSlice"
 import CastSlide from "../components/common/CastSlide.jsx"
 import MediaVideosSlide from "../components/common/MediaVideosSlide.jsx"
+import BackdropSlide from './../components/common/BackdropSlide';
+import PosterSlide from "../components/common/PosterSlide.jsx"
+import RecommendSlide from "../components/common/RecommendSlide.jsx"
+import MediaSlide from "../components/common/MediaSlide.jsx"
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -229,6 +233,40 @@ const MediaDetail = () => {
             </Container>
           </div>
           {/* media videos */}
+
+          {/* media backdrop */}
+          {media.images.backdrops.length > 0 && (
+            <Container header="backdrops">
+              <BackdropSlide backdrops={media.images.backdrops} />
+            </Container>
+          )}
+          {/* media backdrop */}
+
+          {/* media poster */}
+          {media.images.posters.length > 0 && (
+            <Container header="posters">
+              <PosterSlide posters={media.images.posters} />
+            </Container>
+          )}
+          {/* media poster */}
+
+          {/* media reviews */}
+
+          {/* media reviews */}
+
+          {/* media recommendation */}
+          <Container header="you may also like">
+            {media.recommend.length > 0 && (
+              <RecommendSlide medias={media.recommend} mediaType={mediaType} />
+            )}
+            {media.recommend.length === 0 && (
+              <MediaSlide
+                mediaType={mediaType}
+                mediaCategory={tmdbConfigs.mediaCategory.top_rated}
+              />
+            )}
+          </Container>
+          {/* media recommendation */}
         </Box>
       </>
     ) : null
