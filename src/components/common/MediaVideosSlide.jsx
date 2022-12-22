@@ -22,7 +22,6 @@ const MediaVideo = ({ video }) => {
                 title={video.id}
                 style={{ border: 0 }}
             >
-
             </iframe>
         </Box>
     )
@@ -33,11 +32,13 @@ const MediaVideosSlide = ({ videos }) => {
 
     return (
         <NavigationSwiper>
-            {videos.map((video, index) => (
-                <SwiperSlide key={index}>
-                    <MediaVideo video={video} />
-                </SwiperSlide>
-            ))}
+            {
+                videos.map((video, index) => (
+                    <SwiperSlide key={index}>
+                        <MediaVideo video={video} />
+                    </SwiperSlide>
+                ))
+            }
         </NavigationSwiper>
     )
 }

@@ -15,7 +15,7 @@ const NavigationSwiper = ({ children }) => {
                 backgroundColor: "text.primary"
             },
             "& .swiper-button-next,& .swiper-button-prev": {
-                color: "text.prmary",
+                color: "text.primary",
                 "&::after": {
                     fontSize: { xs: "1rem", md: "2rem" }
                 }
