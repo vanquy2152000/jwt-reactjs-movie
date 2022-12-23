@@ -14,7 +14,7 @@ const ReviewItem = ({ review, onRemoved }) => {
     const { user } = useSelector((state) => state.user)
 
     const [onRequest, setOnRequest] = useState(false)
-    console.log("check review:", review)
+
     const onRemove = async () => {
         if (onRequest) return
         setOnRequest(true)
@@ -80,7 +80,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     const [content, setContent] = useState("")
     const [reviewCount, setReviewCount] = useState(0)
     const skip = 4
-    
+
     useEffect(() => {
         setListReviews([...reviews])
         setFilteredReviews([...reviews]?.splice(0, skip))
@@ -117,7 +117,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
         setFilteredReviews([...filteredReviews, ...[...listReviews].splice(page * skip, skip)])
         setPage(page + 1)
     }
-    console.log("list review:", listReviews)
+
     const onRemoved = (id) => {
         if (listReviews.findIndex(e => e.id === id) !== -1) {
             const newListReviews = [...listReviews].filter(e => e.id !== id)
@@ -126,12 +126,12 @@ const MediaReview = ({ reviews, media, mediaType }) => {
         } else {
             setFilteredReviews([...filteredReviews].filter(e => e.id !== id))
         }
-        
+
         setReviewCount(reviewCount - 1)
 
         toast.success("Remove review success")
     }
-    console.log("check fil", filteredReviews)
+
     return (
         <Container header={`Reviews (${reviewCount})`}>
             <Stack spacing={4} marginBottom={2}>

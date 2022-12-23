@@ -52,7 +52,6 @@ const MediaDetail = () => {
     const { response, err } = await mediaApi.getDetail({ mediaType, mediaId })
     dispatch(setGlobalLoading(false))
 
-    console.log("check response media detail:", response)
     if (response) {
       setMedia(response)
       setIsFavorite(response.isFavorite)
@@ -83,7 +82,6 @@ const MediaDetail = () => {
     }
 
     const { response, err } = await favoriteApi.add(body)
-    console.log("check response favorite:", response)
     setOnRequest(false)
 
     if (err) toast.error(err.message)
@@ -99,7 +97,7 @@ const MediaDetail = () => {
     setOnRequest(true)
 
     const favorite = listFavorites.find(e => e.mediaId.toString() === media.id.toString())
-    console.log("favorite", favorite)
+
     const { response, err } = await favoriteApi.remove({ favoriteId: favorite.id })
     setOnRequest(false)
     if (err) toast.error(err.message)
