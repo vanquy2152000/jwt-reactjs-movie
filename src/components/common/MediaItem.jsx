@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import CircularRate from './CircularRate'
+import CircularRate from './CircularRate.jsx'
 import tmdbConfigs from '../../api/configs/tmdb.configs'
 import uiConfigs from '../../configs/ui.configs'
 import favoriteUtils from '../../utils/favorite.utils';
