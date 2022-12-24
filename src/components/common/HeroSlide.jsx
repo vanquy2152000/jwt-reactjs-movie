@@ -35,6 +35,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
             mediaCategory,
             page: 1
         })
+        console.log("check CircularRate:", response)
 
         if (response) setMovies(response.results);
         if (err) toast.error(err.message)
