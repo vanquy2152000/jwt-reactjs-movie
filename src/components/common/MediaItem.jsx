@@ -117,7 +117,6 @@ const MediaItem = ({ media, mediaType }) => {
                         </Box>
                     </>
                 )}
-
                 {/* movie or tv item */}
 
                 {/* people */}

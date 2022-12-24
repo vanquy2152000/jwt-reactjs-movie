@@ -1,8 +1,113 @@
-import React from 'react'
+import DeleteIcon from "@mui/icons-material/Delete"
+import { LoadingButton } from "@mui/lab"
+import { Box, Button, Grid } from "@mui/material"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
+import MediaItem from "../components/common/MediaItem"
+import Container from "../components/common/Container"
+import uiConfigs from "../configs/ui.configs"
+import favoriteApi from "../api/modules/favorite.api"
+import { setGlobalLoading } from "../redux/features/globalLoadingSlice"
+import { removeFavorites } from "../redux/features/userSlice"
+
+const FavoriteItem = ({ media, onRemoved }) => {
+  const dispatch = useDispatch();
+
+  const [onRequest, setOnRequest] = useState(false)
+
+  const onRemove = async () => {
+    if (onRequest) return
+    setOnRequest(true);
+
+    const { response, err } = await favoriteApi.remove({ favoriteId: media.id })
+
+    console.log("check remove favovite:", response)
+    setOnRequest(false)
+
+    if (err) toast.error(err.message)
+    if (response) {
+      toast.success("Remove favorite success")
+      dispatch(removeFavorites({ mediaId: media.mediaId }))
+      onRemoved(media.id)
+    }
+  }
+  return (
+    <>
+      <MediaItem media={media} mediaType={media.mediaType} />
+      <LoadingButton
+        fullWidth
+        variant="contained"
+        sx={{ marginTop: 2 }}
+        startIcon={<DeleteIcon />}
+        loadingPosition="start"
+        loading={onRequest}
+        onClick={onRemove}
+      >
+        remove
+      </LoadingButton>
+    </>
+  )
+}
 
 const FavoriteList = () => {
+  const [medias, setMedias] = useState(useState([]))
+  const [filteredMedias, setFilteredMedias] = useState([])
+  const [page, setPage] = useState(1)
+  const [count, setCount] = useState(0)
+
+  const dispatch = useDispatch()
+
+  const skip = 1
+
+  useEffect(() => {
+    getFavorites()
+  }, [dispatch])
+
+  const getFavorites = async () => {
+    dispatch(setGlobalLoading(true))
+    const { response, err } = await favoriteApi.getList()
+    console.log("check favorite : ", response)
+    dispatch(setGlobalLoading(false))
+    if (err) toast.error(err.message)
+    if (response) {
+      setCount(response.length)
+      setMedias([...response])
+      setFilteredMedias([...response].splice(0, skip))
+    }
+  }
+  console.log("check filtered :", filteredMedias)
+  const onLoadMore = () => {
+    setFilteredMedias([...filteredMedias, ...[...medias].splice(page * skip, skip)])
+    setPage(page + 1)
+  }
+
+  const onRemoved = (id) => {
+    const newMedias = [...medias].filter(e => e.id !== id);
+    setMedias(newMedias);
+    setFilteredMedias([...newMedias].splice(0, page * skip))
+    setCount(count - 1)
+  }
+
+
+
   return (
-    <div>FavoriteList</div>
+    <Box sx={{ ...uiConfigs.style.mainContent }}>
+      <Container header={`Your favorites(${count})`}>
+        <Grid container spacing={1} sx={{ marginRight: "-8px!important" }}>
+          {filteredMedias.map((media, index) => (
+            <Grid item xs={6} sm={4} md={3} key={`favoriteMedia-${index}`}>
+              <FavoriteItem media={media} onRemoved={onRemoved} />
+            </Grid>
+          ))}
+        </Grid>
+        {filteredMedias.length < medias.length && (
+          <Button onClick={onLoadMore}>
+            Load more
+          </Button>
+        )}
+      </Container>
+    </Box>
   )
 }
 
