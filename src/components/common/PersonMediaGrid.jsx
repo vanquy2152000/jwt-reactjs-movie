@@ -20,7 +20,6 @@ const PersonMediaGrid = ({ personId }) => {
         if (err) toast.error(err.message)
         if (response) {
             const mediasSorted = response.cast.sort((a, b) => getReleaseDate(b) - getReleaseDate(a))
-            console.log("check get medias :", mediasSorted)
             setMedias([...mediasSorted])
             setFilteredMedias([...mediasSorted].splice(0, skip))
         }
@@ -36,7 +35,6 @@ const PersonMediaGrid = ({ personId }) => {
         setFilteredMedias([...filteredMedias, ...[...medias].splice(page * skip, skip)])
         setPage(page + 1)
     }
-    console.log("check filtered people media grid:", filteredMedias)
 
     return (
         <>

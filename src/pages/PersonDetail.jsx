@@ -27,8 +27,6 @@ const PersonDetail = () => {
         if (response) setPerson(response)
     }
 
-    // console.log("Person:", person.profile_path)
-    console.log("Person:", person)
 
     return (
         <>

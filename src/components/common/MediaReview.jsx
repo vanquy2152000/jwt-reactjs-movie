@@ -101,7 +101,6 @@ const MediaReview = ({ reviews, media, mediaType }) => {
 
         const { response, err } = await reviewApi.add(body)
 
-        console.log("check review add :", response)
 
         setOnRequest(false)
         if (err) toast.error(err.message)

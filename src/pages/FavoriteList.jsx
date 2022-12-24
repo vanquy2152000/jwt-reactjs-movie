@@ -22,7 +22,6 @@ const FavoriteItem = ({ media, onRemoved }) => {
 
     const { response, err } = await favoriteApi.remove({ favoriteId: media.id })
 
-    console.log("check remove favovite:", response)
     setOnRequest(false)
 
     if (err) toast.error(err.message)
@@ -58,7 +57,7 @@ const FavoriteList = () => {
 
   const dispatch = useDispatch()
 
-  const skip = 1
+  const skip = 8
 
   useEffect(() => {
     getFavorites()
@@ -67,7 +66,6 @@ const FavoriteList = () => {
   const getFavorites = async () => {
     dispatch(setGlobalLoading(true))
     const { response, err } = await favoriteApi.getList()
-    console.log("check favorite : ", response)
     dispatch(setGlobalLoading(false))
     if (err) toast.error(err.message)
     if (response) {
@@ -76,7 +74,6 @@ const FavoriteList = () => {
       setFilteredMedias([...response].splice(0, skip))
     }
   }
-  console.log("check filtered :", filteredMedias)
   const onLoadMore = () => {
     setFilteredMedias([...filteredMedias, ...[...medias].splice(page * skip, skip)])
     setPage(page + 1)
