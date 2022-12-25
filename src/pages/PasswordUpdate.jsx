@@ -33,10 +33,13 @@ const PasswordUpdate = () => {
         .required("newPassword is required"),
       confirmNewPassword: Yup.string()
         .oneOf([Yup.ref("newPassword")], "confirmNewPassword not match")
-        .min(8, "password minium 8 characters")
-        .required("password is required")
+        .min(8, "ConfirmNewPassword minium 8 characters")
+        .required("confirmNewPassword is required")
     }),
-    onSubmit: async values => onUpdate(values)
+    onSubmit: async values => {
+      onUpdate(values)
+      console.log("check value:", values)
+    }
   })
 
   const onUpdate = async (values) => {
@@ -44,7 +47,8 @@ const PasswordUpdate = () => {
     setOnRequest(true)
 
     const { response, err } = await userApi.passwordUpdate(values)
-
+    console.log({ response })
+    console.log({ err })
     setOnRequest(false)
 
     if (err) toast.error(err.message)

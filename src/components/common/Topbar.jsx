@@ -4,7 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined'
 import { AppBar, Box, Button, IconButton, Stack, Toolbar, useScrollTrigger } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import menuConfigs from '../../configs/menu.configs';
 import { themeModes } from "../../configs/theme.configs";
 import { setThemeMode } from '../../redux/features/themeModeSlice';
@@ -36,7 +36,8 @@ const Topbar = () => {
   const { appState } = useSelector(state => state.appState)
   const { themeMode } = useSelector(state => state.themeMode)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
+  
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const onSwitchTheme = () => {
@@ -46,6 +47,9 @@ const Topbar = () => {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
+  const handleClickLogo = () => {
+    navigate("/")
+  }
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -68,7 +72,7 @@ const Topbar = () => {
             {/* main menu */}
             <Box flexGrow={1} alignItems="center" display={{ xs: "none", md: "flex" }}>
               <Box sx={{ marginRight: "30px" }}>
-                <Logo />
+                <Logo onClick={handleClickLogo} />
               </Box>
               {menuConfigs.main.map((item, index) => (
                 <Button

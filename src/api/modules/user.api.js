@@ -49,9 +49,11 @@ const userApi = {
                 userEndpoints.passwordUpdate,
                 { password, newPassword, confirmNewPassword }
             )
+            console.log("check loi :", response)
 
             return { response }
         } catch (err) {
+            console.log("ccheck err: ", err)
             return { err }
         }
     },
