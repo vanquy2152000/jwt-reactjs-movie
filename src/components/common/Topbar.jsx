@@ -37,7 +37,7 @@ const Topbar = () => {
   const { themeMode } = useSelector(state => state.themeMode)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const onSwitchTheme = () => {
@@ -71,8 +71,11 @@ const Topbar = () => {
 
             {/* main menu */}
             <Box flexGrow={1} alignItems="center" display={{ xs: "none", md: "flex" }}>
-              <Box sx={{ marginRight: "30px" }}>
-                <Logo onClick={handleClickLogo} />
+              <Box
+                sx={{ marginRight: "30px", cursor: "pointer", caretColor: "transparent" }}
+                onClick={handleClickLogo}
+              >
+                <Logo />
               </Box>
               {menuConfigs.main.map((item, index) => (
                 <Button
