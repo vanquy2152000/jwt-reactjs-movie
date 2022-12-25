@@ -38,7 +38,6 @@ const PasswordUpdate = () => {
     }),
     onSubmit: async values => {
       onUpdate(values)
-      console.log("check value:", values)
     }
   })
 
@@ -47,8 +46,6 @@ const PasswordUpdate = () => {
     setOnRequest(true)
 
     const { response, err } = await userApi.passwordUpdate(values)
-    console.log({ response })
-    console.log({ err })
     setOnRequest(false)
 
     if (err) toast.error(err.message)

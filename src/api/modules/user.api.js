@@ -26,7 +26,7 @@ const userApi = {
         try {
             const response = await publicClient.post(
                 userEndpoints.signup,
-                { username, displayName, password, confirmPassword, }
+                { username, displayName, password, confirmPassword }
             )
 
             return { response }
@@ -49,11 +49,9 @@ const userApi = {
                 userEndpoints.passwordUpdate,
                 { password, newPassword, confirmNewPassword }
             )
-            console.log("check loi :", response)
 
             return { response }
         } catch (err) {
-            console.log("ccheck err: ", err)
             return { err }
         }
     },
